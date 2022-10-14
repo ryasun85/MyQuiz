@@ -1,0 +1,90 @@
+﻿@model DAL.tblQuestion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Question Details</h4>
+
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Question Text :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionText)
+        </dd>
+
+        @if (!User.IsInRole("Restricted"))
+        {
+        <dt>
+            @Html.DisplayName("Option A :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option1)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Option B :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option2)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Option C :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option3)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Option D :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option4)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Option E :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option5)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Correct Answer :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectAnswer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tlkpQuiz.QuizName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tlkpQuiz.QuizName)
+        </dd>
+        }
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Edit"))
+    {
+       
+        @Html.ActionLink(" Edit", "Edit", new { id = Model.QuestionID }, new { @class = "btn btn-success fa fa-edit" })
+    }
+
+  
+    @Html.ActionLink(" Back to List", "Index", "Question", new { quizId = Model.QuizID }, new { @class = "btn btn-info fa fa-arrow-circle-left" })
+  
+</p>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DAL.tlkpQuiz>
+
+@{
+    ViewBag.Title = "Available Quizzes";
+}
+
+<h2>Please Select Quiz you would like to take:</h2>
+@if (User.IsInRole("Edit"))
+{
+
+    <p>
+        @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus", @style = "color:black" })
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Select link below: ")
+        </th>
+        <th>
+            @Html.DisplayName("Quiz info: ")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-weight:bold">
+
+                @Html.ActionLink(item.QuizName, "Index", "Question", new { quizId = item.QuizID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizDescription)
+            </td>
+
+
+            <td>
+                @if (User.IsInRole("Edit"))
+                {
+
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.QuizID }, new { @class = "btn btn-success fa fa-edit" })
+                }
+
+                @if (!User.IsInRole("Restricted"))
+                {
+
+
+                    @Html.ActionLink(" Details", "Details", new { id = item.QuizID }, new { @class = "btn btn-warning fa fa-info-circle" })
+                }
+
+                @if (User.IsInRole("Edit"))
+                {
+                    @Html.ActionLink(" Delete", "Delete", new { id = item.QuizID }, new { @class = "btn btn-danger fa fa-trash" })
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>

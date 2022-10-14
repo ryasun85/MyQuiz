@@ -1,0 +1,125 @@
+﻿@model IEnumerable<DAL.tblQuestion>
+
+@{
+    ViewBag.Title = "Quiz";
+}
+
+@*TODO add Description text to Question table or View model*@
+@*@Html.DisplayFor(m =>m.)*@
+
+@*@foreach (var item in Model)
+    {
+        @Html.DisplayFor(modelItem => item.tlkpQuiz.QuizName)
+    }*@
+
+<h4>
+    Welcome to your selected Quiz. Each Question is a multiple choice one and it has set of between 3-5 possible answers. 1 or more answers can be correct.
+</h4>
+
+@if (User.IsInRole("Edit"))
+{
+
+    <p>
+        @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus", @style = "color:black" })
+    </p>
+}
+<table class="table">
+
+    @{int questionNumber = 0;}
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td style="font-weight:bold">
+                @{questionNumber++;} @questionNumber.)
+
+                @Html.DisplayFor(modelItem => item.QuestionText)
+
+            </td>
+        </tr>
+
+        if (!User.IsInRole("Restricted"))
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("Option1")
+                    @Html.DisplayName("A)")
+                    @Html.DisplayFor(modelItem => item.Option1)
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    @Html.CheckBox("Option2")
+                    @Html.DisplayName("B)")
+                    @Html.DisplayFor(modelItem => item.Option2)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.CheckBox("Option3")
+                    @Html.DisplayName("C)")
+                    @Html.DisplayFor(modelItem => item.Option3)
+                </td>
+
+            </tr>
+            if (item.Option4 != null)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBox("Option4")
+                        @Html.DisplayName("D)")
+                        @Html.DisplayFor(modelItem => item.Option4)
+                    </td>
+
+                </tr>
+            }
+
+            if (item.Option5 != null)
+            {
+                <tr>
+                    <td>
+
+                        @Html.CheckBox("Option5")
+                        @Html.DisplayName("E)")
+                        @Html.DisplayFor(modelItem => item.Option5)
+                    </td>
+                </tr>
+            }
+        }
+        @*<tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorrectAnswer)
+                </td>
+            </tr>*@
+        @*<tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tlkpQuiz.QuizName)
+                </td>
+            </tr>*@
+        <tr>
+            <td>
+                @if (User.IsInRole("Edit"))
+                {
+
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.QuestionID }, new { @class = "btn btn-success fa fa-edit" })
+                }
+
+                @if (!User.IsInRole("Restricted"))
+                {
+
+                    @Html.ActionLink(" Details", "Details", new { id = item.QuestionID }, new { @class = "btn btn-warning fa fa-info-circle" })
+                }
+                @if (User.IsInRole("Edit"))
+                {
+
+                    @Html.ActionLink(" Delete", "Delete", new { id = item.QuestionID }, new { @class = "btn btn-danger fa fa-trash" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="col-md-offset-10">
+    <input type="submit" value="Submit Quiz" class="btn btn-success" />
+</div>

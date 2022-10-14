@@ -1,0 +1,37 @@
+﻿@model DAL.tlkpQuiz
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Details :</h4>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Quiz Name :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Quiz Description :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Edit"))
+    {
+        @Html.ActionLink(" Edit", "Edit", new { id = Model.QuizID }, new { @class = "btn btn-success fa fa-edit" })
+    }
+    @Html.ActionLink(" Back to List", "Index", "", new { @class = "btn btn-info fa fa-arrow-circle-left" })
+</p>

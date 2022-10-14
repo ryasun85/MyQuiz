@@ -1,0 +1,42 @@
+﻿@model DAL.tlkpQuiz
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Delete</h3>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Quiz Name :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Quiz Description :")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizDescription)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+
+            @Html.ActionLink(" Back to List", "Index", "", new { @class = "btn btn-info fa fa-arrow-circle-left" })
+        </div>
+    }
+</div>
